@@ -190,7 +190,7 @@ all_language_codes = {
 
 app = Flask(__name__)
 
-@app.route('/detect', methods=['GET'])
+@app.route('/detect', methods=['POST'])
 def result():
 
     # try:
