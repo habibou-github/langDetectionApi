@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,request,json
 from langdetect import detect
 
 all_language_codes = {
@@ -190,16 +190,19 @@ all_language_codes = {
 
 app = Flask(__name__)
 
-@app.route('/<text>', methods=['POST', 'GET'])
-@app.route('/langDetect/<text>', methods=['POST', 'GET'])
-def result(text):
-    try:
-        if text:
-            return "Language is : " + all_language_codes.get(detect(text))
-        else:
-            return "you must enter a text to detect its language"
-    except:
-        return "you must enter a text to detect its language"
+@app.route('/detect', methods=['GET'])
+def result():
+
+    # try:
+    #     if text:
+    #         return "Language is : " + all_language_codes.get(detect(text))
+    #     else:
+    #         return "you must enter a text to detect its language"
+    # except:
+    #     return "you must enter a text to detect its language"
+
+    res = request.get_json()
+    return json.dumps(all_language_codes.get(detect(res['text'])))
 
 
 if __name__ == "__main__":
