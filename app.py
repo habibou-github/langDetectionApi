@@ -202,7 +202,8 @@ def result():
     #     return "you must enter a text to detect its language"
 
     res = request.get_json()
-    return json.dumps(all_language_codes.get(detect(res['text'])))
+    value = {"language" : all_language_codes.get(detect(res['text']))}
+    return json.dumps(value)
 
 
 if __name__ == "__main__":
